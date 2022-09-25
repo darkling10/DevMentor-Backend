@@ -8,9 +8,6 @@ const coursesPost = async (req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-
-    
-
     const { title, author, category, linkToCourse, language, platform, price, description, pros, cons, likes, disLikes, Comments, } = req.body;
     try {
 
@@ -31,15 +28,12 @@ const coursesPost = async (req, res) => {
 const getCourse = async (req, res) => {
 
     try {
-        const courseData = await Courses.find({});
+        const courseData = await Courses.find({}).sort({"likes":-1});
         return res.status(200).json({ data: courseData })
-
-
     } catch (err) {
         console.log(err.message);
         res.status(500).json({ message: err.message });
     }
-
 }
 
 

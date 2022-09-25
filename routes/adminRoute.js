@@ -17,7 +17,7 @@ router.get("/", authAdmin, (req, res) => {
   res.json("Hiiii i m admin");
 });
 
-router.get("/course", authAdmin, courseController.getCourse);
+router.get("/course", courseController.getCourse);// remove authadmin from here
 
 // /admin/postCourse
 router.post(
