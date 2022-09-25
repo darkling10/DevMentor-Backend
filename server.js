@@ -15,7 +15,7 @@ connectDB();
 // middlewares
 app.use(express.json({ extended: false }));
 
-app.use(cors());
+app.use(cors({ origin: "*" }));
 
 app.get("/", (req, res) => {
   res.send("Welcome to DevMentor");
@@ -23,7 +23,6 @@ app.get("/", (req, res) => {
 
 app.use("/user", require("./routes/usersRoute"));
 app.use("/admin", require("./routes/adminRoute"));
-
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
