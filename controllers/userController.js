@@ -39,7 +39,7 @@ const userLogin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // see if user exists
+  
     let user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
