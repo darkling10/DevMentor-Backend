@@ -23,7 +23,9 @@ const userRegistration = async (req, res) => {
     });
 
     const myToken = await user.getAuthToken();
-    return res.status(200).json({ token: myToken, data: user });
+
+    const sendUser = await decode(myToken);
+    return res.status(200).json({ token: myToken, data: sendUser });
   } catch (err) {
     console.log(err.message);
     return res.status(500).json({ message: err.message });
@@ -39,7 +41,6 @@ const userLogin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-  
     let user = await User.findOne({ email });
     if (!user) {
       return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
