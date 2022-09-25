@@ -6,6 +6,7 @@ const jwt = require("jsonwebtoken");
 const config = require("config");
 const userController = require("../controllers/userController");
 const router = express.Router();
+const authUser = require("../middleware/authUser");
 
 // @route  POST/users
 // @desc  Register user
@@ -36,6 +37,25 @@ router.post(
       "please enter a password with 6 or more characters"
     ).isLength({ min: 6 }),
   ],
+  userController.userLogin
+);
+
+// @route  POST/users/interview
+// @desc  Post interview
+// @access public
+router.post(
+  "/interview",
+  ([
+    check("company", "please include valid company").not().isEmpty(),
+    check("role", "please include valid role").not().isEmpty(),
+    check("date", "please include valid on campus").not().isEmpty(),
+    check("location", "please include valid on campus").not().isEmpty(),
+    check("ctc", "please include valid on campus").not().isEmpty(),
+    check("selected", "please include valid on campus").not().isEmpty(),
+    check("upVote", "please include valid on campus").not().isEmpty(),
+    check("description", "please include valid on campus").not().isEmpty(),
+  ],
+  authUser),
   userController.userLogin
 );
 
