@@ -25,7 +25,7 @@ const userRegistration = async (req, res) => {
     const myToken = await user.getAuthToken();
 
     const sendUser = await decode(myToken);
-    return res.status(200).json({ token: myToken, user: sendUser });
+    return res.status(200).json({ token: myToken, user : sendUser });
   } catch (err) {
     console.log(err.message);
     return res.status(500).json({ message: err.message });
