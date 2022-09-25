@@ -51,8 +51,10 @@ const userLogin = async (req, res) => {
     }
 
     const myToken = await user.getAuthToken();
-    const sendUser = await decode(myToken)
-    res.status(200).json({ message: "Login success", token: myToken });
+    const sendUser = await decode(myToken);
+    res
+      .status(200)
+      .json({ message: "Login success", token: myToken, user: sendUser });
   } catch (err) {
     console.log(err.message);
     res.status(500).json({ message: err.message });
