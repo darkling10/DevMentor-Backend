@@ -24,14 +24,12 @@ router.post(
   userController.userRegistration
 );
 
-
 // @route  POST/users/login
 // @desc  Login user
 // @access public
 router.post(
   "/login",
   [
-    check("name", "Name is required").not().isEmpty(),
     check("email", "please include valid email").isEmail(),
     check(
       "password",
