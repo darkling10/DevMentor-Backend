@@ -8,11 +8,6 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    profileURL: {
-      type: String,
-      default:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-    },
     email: {
       type: String,
       required: true,
@@ -57,7 +52,7 @@ UserSchema.methods.getAuthToken = async function (data) {
     id: this.id,
     email: this.email,
     name: this.name,
-    userType: this.userType,
+    userType : this.userType
   };
   var tokenValue = jwt.sign(params, process.env.JWTSECRETKEY, {
     expiresIn: "300000s",
