@@ -4,7 +4,7 @@ const { check, body, validationResult, Result } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const authAdmin = require("../middleware/authAdmin");
-const courseController = require('../controllers/courseController')
+const courseController = require("../controllers/courseController");
 
 const router = express.Router();
 
@@ -15,8 +15,6 @@ const router = express.Router();
 // router.get("/", authAdmin, (req, res) => {
 //   res.json("Hiiii i m admin");
 // });
-
-
 
 router.get("/course", authAdmin, courseController.getCourse);
 
@@ -36,11 +34,8 @@ router.post(
     check("likes", "likes is required").not().isEmpty(),
     check("disLikes", "disLikes is required").not().isEmpty(),
     check("Comments", "Comments is required").not().isEmpty(),
-
   ],
   courseController.coursesPost
-
 );
-
 
 module.exports = router;

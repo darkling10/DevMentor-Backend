@@ -7,7 +7,7 @@ const config = require("config");
 const userController = require("../controllers/userController");
 const router = express.Router();
 const authUser = require("../middleware/authUser");
-
+const interviewController = require("../controllers/interviewController");
 // @route  POST/users
 // @desc  Register user
 // @access public
@@ -56,7 +56,7 @@ router.post(
     check("description", "please include valid on campus").not().isEmpty(),
   ],
   authUser),
-  userController.userLogin
+  interviewController.postExperience
 );
 
 module.exports = router;

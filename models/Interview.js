@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const roundSchema = require("../schema/roundSchema");
 
 const experienceSchema = mongoose.Schema({
   company: {
@@ -38,10 +39,13 @@ const experienceSchema = mongoose.Schema({
   },
   process: {
     roundOne: {
-      description: String,
-      questionAsked: String,
-      difficultyLevel: String,
-      duration: String,
+      type: roundSchema,
+    },
+    roundTwo: {
+      type: roundSchema,
+    },
+    roundThree: {
+      type: roundSchema,
     },
   },
 });
