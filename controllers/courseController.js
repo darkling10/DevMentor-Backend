@@ -16,12 +16,12 @@ const coursesPost = async (req, res) => {
         });
         // console.log(course)
         await course.save();
-        res.status(200).json(course);
+        return res.status(200).json(course);
 
 
     } catch (err) {
         console.log(err.message);
-        res.status(500).json({ message: err.message });
+        return res.status(500).json({ message: err.message });
     }
 };
 
