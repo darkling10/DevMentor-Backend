@@ -8,11 +8,11 @@ const coursesPost = async (req, res) => {
         return res.status(400).json({ errors: errors.array() });
     }
 
-    const { title, category, linkToCourse, language, platform, price, description, pros, cons, likes, disLikes, Comments, } = req.body;
+    const { title, author, category, linkToCourse, language, platform, price, description, pros, cons, likes, disLikes, Comments, } = req.body;
     try {
 
         const course = new Courses({
-            title, category, linkToCourse, language, platform, price, description, pros, cons, likes, disLikes, Comments
+            title, author, category, linkToCourse, language, platform, price, description, pros, cons, likes, disLikes, Comments
         });
         // console.log(course)
         await course.save();
