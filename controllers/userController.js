@@ -1,6 +1,7 @@
 const User = require("../models/User");
 const { check, body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
+const { JsonWebTokenError, decode } = require("jsonwebtoken");
 
 const userRegistration = async (req, res) => {
   const errors = validationResult(req);
@@ -50,6 +51,7 @@ const userLogin = async (req, res) => {
     }
 
     const myToken = await user.getAuthToken();
+    const sendUser = await decode(myToken)
     res.status(200).json({ message: "Login success", token: myToken });
   } catch (err) {
     console.log(err.message);
