@@ -3,10 +3,10 @@ const bcrypt = require("bcryptjs");
 const Courses = require("../models/Courses");
 
 const coursesPost = async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+  }
 
     const { title, author, category, linkToCourse, language, platform, price, description, pros, cons, likes, disLikes, Comments, } = req.body;
     try {
@@ -38,6 +38,6 @@ const getCourse = async (req, res) => {
 
 
 module.exports = {
-    coursesPost,
-    getCourse
+  coursesPost,
+  getCourse,
 };

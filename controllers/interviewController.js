@@ -41,7 +41,6 @@ const postExperience = async (req, res) => {
 
     const newInterview = await interviewPost.save();
     return res.status(200).json({ message: "Created successfully" });
-    
   } catch (err) {
     console.log(err.message);
     return res.status(400).json({ error: err });

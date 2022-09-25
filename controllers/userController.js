@@ -23,10 +23,12 @@ const userRegistration = async (req, res) => {
     });
 
     const myToken = await user.getAuthToken();
-    res.status(200).json({ token: myToken });
+
+    const sendUser = await decode(myToken);
+    return res.status(200).json({ token: myToken, user : sendUser });
   } catch (err) {
     console.log(err.message);
-    res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: err.message });
   }
 };
 
@@ -39,28 +41,26 @@ const userLogin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // see if user exists
     let user = await User.findOne({ email });
     if (!user) {
-      res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
+      return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
     }
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-      res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
+      return res.status(400).json({ errors: [{ msg: "Invalid Credentials" }] });
     }
 
     const myToken = await user.getAuthToken();
     const sendUser = await decode(myToken);
-    res
+    return res
       .status(200)
       .json({ message: "Login success", token: myToken, user: sendUser });
   } catch (err) {
     console.log(err.message);
-    res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: err.message });
   }
 };
-
 
 module.exports = {
   userRegistration,
