@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const authAdmin = require("../middleware/authAdmin");
 const courseController = require("../controllers/courseController");
+const userController=require("../controllers/userController")
 
 const router = express.Router();
 
@@ -12,9 +13,9 @@ const router = express.Router();
 // @desc  Show admin
 // @access admin
 
-// router.get("/", authAdmin, (req, res) => {
-//   res.json("Hiiii i m admin");
-// });
+router.get("/", authAdmin, (req, res) => {
+  res.json("Hiiii i m admin");
+});
 
 router.get("/course", authAdmin, courseController.getCourse);
 
@@ -37,5 +38,8 @@ router.post(
   ],
   courseController.coursesPost
 );
+
+
+
 
 module.exports = router;
