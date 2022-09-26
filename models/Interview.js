@@ -27,6 +27,7 @@ const experienceSchema = mongoose.Schema({
   },
   upVote: {
     type: Number,
+    default: 0,
   },
   selected: {
     type: Boolean,

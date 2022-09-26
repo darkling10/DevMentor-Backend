@@ -22,7 +22,7 @@ const coursesPost = async (req, res) => {
     Comments,
   } = req.body;
   try {
-    const course = new Courses({
+    const course = await Courses.create({
       title,
       author,
       category,
@@ -33,11 +33,9 @@ const coursesPost = async (req, res) => {
       description,
       pros,
       cons,
-      Comments,
     });
-    // console.log(course)
-    await course.save();
-    res.status(200).json(course);
+
+    res.status(200).json({ data: course });
   } catch (err) {
     console.log(err.message);
     res.status(500).json({ message: err.message });

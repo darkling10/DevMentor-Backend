@@ -25,7 +25,7 @@ const postExperience = async (req, res) => {
   } = req.body;
 
   try {
-    const interviewPost = new Experience({
+    const interviewPost = await Experience.create({
       company: company,
       role: role,
       companyLogo: companyLogo,
@@ -33,17 +33,16 @@ const postExperience = async (req, res) => {
       onCampus: onCampus,
       location: location,
       ctc: ctc,
-      upVote: upVote,
+
       selected: selected,
       description: description,
       process,
     });
 
-    const newInterview = await interviewPost.save();
     return res.status(200).json({ message: "Created successfully" });
   } catch (err) {
     console.log(err.message);
-    return res.status(400).json({ error: err });
+    return res.status(500).json({ error: err });
   }
 };
 

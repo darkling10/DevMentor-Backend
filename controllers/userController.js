@@ -87,17 +87,21 @@ const patchComments = async (req, res) => {
     return res.status(200).json({ message: "Comment added successfully" });
   } catch (err) {
     console.log(err.message);
-    return res.status(400).json({ error: "Something went wrong" });
+    return res.status(500).json({ error: "Something went wrong" });
   }
 };
 
 const getCoursebyLang = async (req, res) => {
   const { language } = req.body;
-  const getData = await Courses.find({ language: language });
-  if (getData) {
-    return res.status(200).json({ data: getData });
-  } else {
-    return res.status(404).json({ message: "Course not found" });
+  try {
+    const getData = await Courses.find({ language: language });
+    if (getData) {
+      return res.status(200).json({ data: getData });
+    } else {
+      return res.status(404).json({ message: "Course not found" });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
   }
 };
 
