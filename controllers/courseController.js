@@ -64,9 +64,10 @@ const getCoursebyLikes = async (req, res) => {
 };
 
 const getCoursebyCategory = async (req, res) => {
-  const { category } = req.body;
+  const { filterBy } = req.body;
+  console.log(filterBy);
   try {
-    const courseData = await Courses.find({ category: category }).sort({
+    const courseData = await Courses.find(filterBy).sort({
       likes: -1,
     });
     return res.status(200).json({ data: courseData });
@@ -80,5 +81,5 @@ module.exports = {
   coursesPost,
   getCourse,
   getCoursebyLikes,
-  getCoursebyCategory
+  getCoursebyCategory,
 };
