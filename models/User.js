@@ -25,6 +25,11 @@ const UserSchema = new mongoose.Schema(
       enum: ["admin", "user"],
       default: "user",
     },
+    profileLogo: {
+      type: String,
+      default:
+        "https://images.unsplash.com/photo-1542909168-82c3e7fdca5c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80",
+    },
     tokens: [
       {
         token: {
@@ -52,7 +57,8 @@ UserSchema.methods.getAuthToken = async function (data) {
     id: this.id,
     email: this.email,
     name: this.name,
-    userType : this.userType
+    userType: this.userType,
+    profileLogo: this.profileLogo,
   };
   var tokenValue = jwt.sign(params, process.env.JWTSECRETKEY, {
     expiresIn: "300000s",
