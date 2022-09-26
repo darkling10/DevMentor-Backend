@@ -25,8 +25,8 @@ const CoursesSchema = new mongoose.Schema(
     },
     language: {
       type: String,
-      enum: ["C++", "Java", "JavaScript", "Python", "Go"],
-      default: null,
+      enum: ["cplusplus", "java", "javascript", "python", "go"],
+      default:null,
       required: true,
     },
     userType: {
