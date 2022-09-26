@@ -57,7 +57,7 @@ router.post(
     check("selected", "please include valid on campus").not().isEmpty(),
     check("description", "please include valid on campus").not().isEmpty(),
   ],
-  authUser),
+    authUser),
   interviewController.postExperience
 );
 
@@ -96,6 +96,21 @@ router.get("/interviewbyID", async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
+
+router.get("/interviewbyCTC", async (req, res) => {
+  try {
+    const data = await Experience.find().select("ctc").sort({ ctc: -1 });
+    if (data) {
+      return res.status(200).json(data);
+    }
+    else {
+      return res.status(404).json({ message: "CTC not found" });
+    }
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ message: err.message });
+  }
+})
 
 router.post("/coursebylang", userController.getCoursebyLang);
 
