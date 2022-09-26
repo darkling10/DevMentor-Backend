@@ -19,8 +19,6 @@ const coursesPost = async (req, res) => {
     description,
     pros,
     cons,
-    likes,
-    disLikes,
     Comments,
   } = req.body;
   try {
@@ -35,8 +33,6 @@ const coursesPost = async (req, res) => {
       description,
       pros,
       cons,
-      likes,
-      disLikes,
       Comments,
     });
     // console.log(course)
