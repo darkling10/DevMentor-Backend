@@ -2,7 +2,7 @@ const { Schema } = require("mongoose");
 
 const commentsSchema = Schema(
   {
-    email: {
+    name: {
       type: String,
       required: true,
     },
