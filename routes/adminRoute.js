@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const authAdmin = require("../middleware/authAdmin");
 const courseController = require("../controllers/courseController");
-const userController=require("../controllers/userController")
+const userController = require("../controllers/userController");
 
 const router = express.Router();
 
@@ -34,12 +34,8 @@ router.post(
     check("cons", "cons is required").not().isEmpty(),
     check("likes", "likes is required").not().isEmpty(),
     check("disLikes", "disLikes is required").not().isEmpty(),
-    check("Comments", "Comments is required").not().isEmpty(),
   ],
   courseController.coursesPost
 );
-
-
-
 
 module.exports = router;

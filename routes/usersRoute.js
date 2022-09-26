@@ -8,9 +8,9 @@ const userController = require("../controllers/userController");
 const router = express.Router();
 const authUser = require("../middleware/authUser");
 const interviewController = require("../controllers/interviewController");
-const courseController = require('../controllers/courseController');
+const courseController = require("../controllers/courseController");
 const Courses = require("../models/Courses");
-const Experience = require("../models/Interview")
+const Experience = require("../models/Interview");
 // @route  POST/users
 // @desc  Register user
 // @access public
@@ -58,47 +58,44 @@ router.post(
     check("upVote", "please include valid on campus").not().isEmpty(),
     check("description", "please include valid on campus").not().isEmpty(),
   ],
-    authUser),
+  authUser),
   interviewController.postExperience
 );
 
 router.get("/course", courseController.getCourse);
 
 router.get("/coursebyid", async (req, res) => {
-  const { id } = req.query
-  const getCourse = await Courses.findById(id)
+  const { id } = req.query;
+  const getCourse = await Courses.findById(id);
 
   if (getCourse) {
-    return res.json(getCourse)
+    return res.json(getCourse);
   } else {
-    return res.status(404)
+    return res.status(404);
   }
-})
+});
 
 router.get("/interview", async (req, res) => {
   try {
     const courseData = await Experience.find({});
-    return res.status(200).json({ data: courseData })
-
-
-} catch (err) {
+    return res.status(200).json({ data: courseData });
+  } catch (err) {
     console.log(err.message);
     res.status(500).json({ message: err.message });
-}
-})
+  }
+});
 
 router.get("/interviewbyID", async (req, res) => {
-
-  const {id}= req.query
+  const { id } = req.query;
   try {
     const courseData = await Experience.findById(id);
-    return res.status(200).json({ data: courseData })
-
-
-} catch (err) {
+    return res.status(200).json({ data: courseData });
+  } catch (err) {
     console.log(err.message);
     res.status(500).json({ message: err.message });
-}
-})
+  }
+});
+
+router.patch("/course", authUser, userController.patchComments);
 
 module.exports = router;

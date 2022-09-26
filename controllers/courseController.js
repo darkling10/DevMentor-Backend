@@ -8,6 +8,7 @@ const coursesPost = async (req, res) => {
     return res.status(400).json({ errors: errors.array() });
   }
 
+
     const { title, author, category, linkToCourse, language, platform, price, description, pros, cons, likes, disLikes, Comments, } = req.body;
     try {
 
