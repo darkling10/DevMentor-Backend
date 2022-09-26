@@ -55,7 +55,6 @@ router.post(
     check("location", "please include valid on campus").not().isEmpty(),
     check("ctc", "please include valid on campus").not().isEmpty(),
     check("selected", "please include valid on campus").not().isEmpty(),
-    check("upVote", "please include valid on campus").not().isEmpty(),
     check("description", "please include valid on campus").not().isEmpty(),
   ],
   authUser),
@@ -97,7 +96,7 @@ router.get("/interviewbyID", async (req, res) => {
   }
 });
 
-router.post("/coursebylang",userController.getCoursebyLang)
+router.post("/coursebylang", userController.getCoursebyLang);
 
 router.patch("/course", authUser, userController.patchComments);
 
