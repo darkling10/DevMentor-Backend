@@ -63,6 +63,7 @@ router.post(
 );
 
 router.get("/course", courseController.getCourse);
+router.get("/coursebylikes", courseController.getCoursebyLikes);
 
 router.get("/coursebyid", async (req, res) => {
   const { id } = req.query;
