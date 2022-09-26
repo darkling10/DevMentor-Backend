@@ -70,7 +70,7 @@ const patchComments = async (req, res) => {
   const authHeader = req.headers["x-access-token"];
   const token = authHeader && authHeader.split(" ")[1];
   const decoded = decode(token);
-
+  console.log(decoded.name)
   const studID = decoded.id;
   const newComment = {
     studId: studID,

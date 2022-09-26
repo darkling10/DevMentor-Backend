@@ -46,6 +46,24 @@ const postExperience = async (req, res) => {
   }
 };
 
+const getByCompany = async (req, res) => {
+  const { filterBy } = req.body;
+
+  console.log(filterBy);
+
+  try {
+    const interviewData = await Experience.find(filterBy);
+    if (interviewData) {
+      return res.status(200).json({ data: interviewData });
+    } else {
+      return res.status(404).json({ message: "Interview Not found" });
+    }
+  } catch (err) {
+    return res.status(500).json({ error: err.message });
+  }
+};
+
 module.exports = {
   postExperience,
+  getByCompany,
 };

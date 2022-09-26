@@ -67,6 +67,9 @@ router.post("/coursebycategory", courseController.getCoursebyCategory);
 
 router.get("/coursebyid", async (req, res) => {
   const { id } = req.query;
+  if (!id) {
+    return res.status(500).json({ message: "Enter a valid ID" });
+  }
   const getCourse = await Courses.findById(id);
 
   if (getCourse) {
@@ -88,6 +91,10 @@ router.get("/interview", async (req, res) => {
 
 router.get("/interviewbyID", async (req, res) => {
   const { id } = req.query;
+
+  if (!id) {
+    return res.status(500).json({ message: "Enter a valid ID" });
+  }
   try {
     const courseData = await Experience.findById(id);
     return res.status(200).json({ data: courseData });
@@ -102,6 +109,9 @@ router.post("/coursebylang", userController.getCoursebyLang);
 router.patch("/course", authUser, userController.patchComments);
 
 router.patch("/interviewlikes", authUser, userController.likeIncrement);
+
 router.patch("/interviewdislikes", authUser, userController.dislikeIncrement);
+
+router.post("/interview-filter", interviewController.getByCompany);
 
 module.exports = router;
