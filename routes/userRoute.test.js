@@ -9,5 +9,5 @@ test("registrating the user", async () => {
   };
 
   const res = await axios.post("localhost:8080/user/", fakeData);
-  
+  expect(res.data.user.email).toBe(fakeData.email)
 });

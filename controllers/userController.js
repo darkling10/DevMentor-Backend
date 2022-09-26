@@ -74,7 +74,7 @@ const patchComments = async (req, res) => {
   const studID = decoded.id;
   const newComment = {
     studId: studID,
-    email: decoded.email,
+    name: decoded.name,
     Comment: Comment,
     profileLogo: decoded.profileLogo,
   };
