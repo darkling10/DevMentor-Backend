@@ -15,6 +15,8 @@ const CoursesSchema = new mongoose.Schema(
     },
     category: {
       type: String,
+      enum:["Web","Android","AI","Data","Language"],
+      default:null,
       required: true,
     },
     linkToCourse: {
@@ -23,6 +25,8 @@ const CoursesSchema = new mongoose.Schema(
     },
     language: {
       type: String,
+      enum:["C++","Java","JavaScript","Python","Go"],
+      default:null,
       required: true,
     },
     userType: {

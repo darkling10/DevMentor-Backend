@@ -27,10 +27,7 @@ const userRegistration = async (req, res) => {
 
     const sendUser = await decode(myToken);
 
-    return res.status(200).json({ token: myToken, user : sendUser });
-
-
-
+    return res.status(200).json({ token: myToken, user: sendUser });
   } catch (err) {
     console.log(err.message);
     return res.status(500).json({ message: err.message });
@@ -67,8 +64,6 @@ const userLogin = async (req, res) => {
   }
 };
 
-
-
 const patchComments = async (req, res) => {
   const { id, Comment } = req.body;
 
@@ -96,8 +91,19 @@ const patchComments = async (req, res) => {
   }
 };
 
+const getCoursebyLang = async (req, res) => {
+  const { language } = req.body;
+  const getData = await Courses.find({ language: language });
+  if (getData) {
+    return res.status(200).json({ data: getData });
+  } else {
+    return res.status(404).json({ message: "Course not found" });
+  }
+};
+
 module.exports = {
   userRegistration,
   userLogin,
   patchComments,
+  getCoursebyLang,
 };

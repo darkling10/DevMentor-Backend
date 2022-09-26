@@ -97,6 +97,8 @@ router.get("/interviewbyID", async (req, res) => {
   }
 });
 
+router.post("/coursebylang",userController.getCoursebyLang)
+
 router.patch("/course", authUser, userController.patchComments);
 
 module.exports = router;
