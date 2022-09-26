@@ -63,6 +63,7 @@ router.post(
 
 router.get("/course", courseController.getCourse);
 router.get("/coursebylikes", courseController.getCoursebyLikes);
+router.post("/coursebycategory", courseController.getCoursebyCategory);
 
 router.get("/coursebyid", async (req, res) => {
   const { id } = req.query;
@@ -99,5 +100,8 @@ router.get("/interviewbyID", async (req, res) => {
 router.post("/coursebylang", userController.getCoursebyLang);
 
 router.patch("/course", authUser, userController.patchComments);
+
+router.patch("/interviewlikes", authUser, userController.likeIncrement);
+router.patch("/interviewdislikes", authUser, userController.dislikeIncrement);
 
 module.exports = router;

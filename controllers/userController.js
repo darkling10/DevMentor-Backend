@@ -105,9 +105,45 @@ const getCoursebyLang = async (req, res) => {
   }
 };
 
+const likeIncrement = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const updateCourse = await Courses.findByIdAndUpdate(id, {
+      $inc: { likes: 1 },
+    });
+
+    if (updateCourse) {
+      return res.status(200).json({ message: "Liked" });
+    } else {
+      return res.status(400).json({ message: "Course not found" });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+const dislikeIncrement = async (req, res) => {
+  const { id } = req.body;
+  try {
+    const updateCourse = await Courses.findByIdAndUpdate(id, {
+      $inc: { disLikes: 1 },
+    });
+
+    if (updateCourse) {
+      return res.status(200).json({ message: "Dislikes" });
+    } else {
+      return res.status(400).json({ message: "Course not found" });
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   userRegistration,
   userLogin,
   patchComments,
   getCoursebyLang,
+  likeIncrement,
+  dislikeIncrement,
 };

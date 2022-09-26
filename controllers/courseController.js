@@ -44,7 +44,7 @@ const coursesPost = async (req, res) => {
 
 const getCourse = async (req, res) => {
   try {
-    const courseData = await Courses.find({});
+    const courseData = await Courses.find({}).sort({ likes: -1 });
 
     return res.status(200).json({ data: courseData });
   } catch (err) {
@@ -63,8 +63,22 @@ const getCoursebyLikes = async (req, res) => {
   }
 };
 
+const getCoursebyCategory = async (req, res) => {
+  const { category } = req.body;
+  try {
+    const courseData = await Courses.find({ category: category }).sort({
+      likes: -1,
+    });
+    return res.status(200).json({ data: courseData });
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({ message: err.message });
+  }
+};
+
 module.exports = {
   coursesPost,
   getCourse,
   getCoursebyLikes,
+  getCoursebyCategory
 };
