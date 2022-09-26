@@ -33,7 +33,6 @@ const postExperience = async (req, res) => {
       onCampus: onCampus,
       location: location,
       ctc: ctc,
-
       selected: selected,
       description: description,
       process,

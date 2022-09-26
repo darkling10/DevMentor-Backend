@@ -70,7 +70,7 @@ const patchComments = async (req, res) => {
   const authHeader = req.headers["x-access-token"];
   const token = authHeader && authHeader.split(" ")[1];
   const decoded = decode(token);
-  console.log(decoded.name)
+  console.log(decoded.name);
   const studID = decoded.id;
   const newComment = {
     studId: studID,
@@ -107,10 +107,38 @@ const getCoursebyLang = async (req, res) => {
 
 const likeIncrement = async (req, res) => {
   const { id } = req.body;
+  const authHeader = req.headers["x-access-token"];
+  const token = authHeader && authHeader.split(" ")[1];
+  const decoded = decode(token);
   try {
-    const updateCourse = await Courses.findByIdAndUpdate(id, {
-      $inc: { likes: 1 },
-    });
+    const check = await Courses.findById(id);
+    if (check) {
+      
+      if (check.disLikes.includes(decoded.id)) {
+        const checkPost = await Courses.findByIdAndUpdate(
+          id,
+          {
+            $pull: { disLikes: decoded.id },
+          },
+          {
+            new: true,
+          }
+        );
+      }
+
+      if (check.likes.includes(decoded.id))
+        return res.json({ message: "Already liked" });
+    }
+
+    const updateCourse = await Courses.findByIdAndUpdate(
+      id,
+      {
+        $push: { likes: decoded.id },
+      },
+      {
+        new: true,
+      }
+    );
 
     if (updateCourse) {
       return res.status(200).json({ message: "Liked" });
@@ -124,13 +152,41 @@ const likeIncrement = async (req, res) => {
 
 const dislikeIncrement = async (req, res) => {
   const { id } = req.body;
+  const authHeader = req.headers["x-access-token"];
+  const token = authHeader && authHeader.split(" ")[1];
+  const decoded = decode(token);
   try {
-    const updateCourse = await Courses.findByIdAndUpdate(id, {
-      $inc: { disLikes: 1 },
-    });
+    const check = await Courses.findById(id);
+    if (check) {
+      
+      if (check.likes.includes(decoded.id)) {
+        const checkPost = await Courses.findByIdAndUpdate(
+          id,
+          {
+            $pull: { likes: decoded.id },
+          },
+          {
+            new: true,
+          }
+        );
+      }
+
+      if (check.disLikes.includes(decoded.id))
+        return res.json({ message: "Already disliked" });
+    }
+
+    const updateCourse = await Courses.findByIdAndUpdate(
+      id,
+      {
+        $push: { disLikes: decoded.id },
+      },
+      {
+        new: true,
+      }
+    );
 
     if (updateCourse) {
-      return res.status(200).json({ message: "Dislikes" });
+      return res.status(200).json({ message: "disLiked" });
     } else {
       return res.status(400).json({ message: "Course not found" });
     }

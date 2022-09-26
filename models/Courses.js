@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { ObjectId } = mongoose.Schema.Types;
 const commentsSchema = require("../schema/commentsSchema");
 
 const CoursesSchema = new mongoose.Schema(
@@ -26,7 +27,7 @@ const CoursesSchema = new mongoose.Schema(
     language: {
       type: String,
       enum: ["cplusplus", "java", "javascript", "python", "go"],
-      default:null,
+      default: null,
       required: true,
     },
     userType: {
@@ -55,13 +56,12 @@ const CoursesSchema = new mongoose.Schema(
       required: true,
     },
     likes: {
-      type: Number,
-
-      default: 0,
+      type: [String],
+      default:null,
     },
     disLikes: {
-      type: Number,
-      default: 0,
+      type: [String],
+      default:null,
     },
     Comments: {
       type: [commentsSchema],
