@@ -56,6 +56,7 @@ router.post(
     check("ctc", "please include valid on campus").not().isEmpty(),
     check("selected", "please include valid on campus").not().isEmpty(),
     check("description", "please include valid on campus").not().isEmpty(),
+    check("name", "please include valid name").not().isEmpty(),
   ],
     authUser),
   interviewController.postExperience

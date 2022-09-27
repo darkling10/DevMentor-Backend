@@ -49,6 +49,11 @@ const experienceSchema = mongoose.Schema({
       type: roundSchema,
     },
   },
+  name: String,
+  resumeLink: String,
+  githubLink: String,
+  linkedinLink: String,
+  college: String,
 });
 
 const Experience = mongoose.model("Experience", experienceSchema);

@@ -11,6 +11,11 @@ const postExperience = async (req, res) => {
   }
 
   const {
+    name,
+    linkedinLink,
+    githubLink,
+    college,
+    resumeLink,
     company,
     role,
     companyLogo,
@@ -36,6 +41,11 @@ const postExperience = async (req, res) => {
       selected: selected,
       description: description,
       process,
+      name: name,
+      resumeLink: resumeLink,
+      githubLink: githubLink,
+      linkedinLink: college,
+      college: college,
     });
 
     return res.status(200).json({ message: "Created successfully" });
