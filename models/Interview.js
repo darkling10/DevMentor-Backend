@@ -14,6 +14,7 @@ const experienceSchema = mongoose.Schema({
       "Uber",
       "American Express",
       "Barclays",
+      "Other"
     ],
     default: null,
   },
