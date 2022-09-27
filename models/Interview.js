@@ -45,7 +45,7 @@ const experienceSchema = mongoose.Schema({
   },
   description: {
     platformUsed: String,
-    subjectLearned: String,
+    subjectLearned: [String],
     courses: String,
     aptitudePrep: String,
   },
