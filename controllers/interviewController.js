@@ -44,7 +44,7 @@ const postExperience = async (req, res) => {
       name: name,
       resumeLink: resumeLink,
       githubLink: githubLink,
-      linkedinLink: college,
+      linkedinLink: linkedinLink,
       college: college,
     });
 
