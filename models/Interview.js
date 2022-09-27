@@ -4,6 +4,18 @@ const roundSchema = require("../schema/roundSchema");
 const experienceSchema = mongoose.Schema({
   company: {
     type: String,
+    enum: [
+      "Microsoft",
+      "Amazon",
+      "Google",
+      "Apple",
+      "Adobe",
+      "Attlassin",
+      "Uber",
+      "American Express",
+      "Barclays",
+    ],
+    default: null,
   },
   role: {
     type: String,
