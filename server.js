@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
 
 app.use("/user", require("./routes/usersRoute"));
 app.use("/admin", require("./routes/adminRoute"));
+app.use("/getCompany", require("./routes/getCompany"));
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
