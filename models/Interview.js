@@ -39,15 +39,7 @@ const experienceSchema = mongoose.Schema({
     aptitudePrep: String,
   },
   process: {
-    roundOne: {
-      type: roundSchema,
-    },
-    roundTwo: {
-      type: roundSchema,
-    },
-    roundThree: {
-      type: roundSchema,
-    },
+    type: String,
   },
   name: String,
   resumeLink: String,
