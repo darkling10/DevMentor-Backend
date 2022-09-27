@@ -7,6 +7,17 @@ const experienceSchema = mongoose.Schema({
   },
   role: {
     type: String,
+    enum: [
+      "SDE Intern",
+      "SDE-1",
+      "SDE-2",
+      "FrontEnd Developer",
+      "BackEnd Developer",
+      "FullStack Developer",
+      "DevOps Engineer",
+      "Other",
+    ],
+    default: "SDE Intern",
   },
   companyLogo: {
     type: String,
